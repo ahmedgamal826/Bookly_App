@@ -11,7 +11,7 @@ class CustomBookImage extends StatelessWidget {
       child: Container(
         // height: MediaQuery.of(context).size.height *
         //     0.5, // height of image = 0.32 from height of screen
-        width: MediaQuery.of(context).size.width * 0.44,
+        width: MediaQuery.of(context).size.width * 0.40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           image: const DecorationImage(
