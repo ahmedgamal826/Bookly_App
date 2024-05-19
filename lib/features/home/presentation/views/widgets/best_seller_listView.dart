@@ -28,7 +28,7 @@ class BestSellerListView extends StatelessWidget {
               child: Row(
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.25,
+                    height: MediaQuery.of(context).size.height * 0.20,
                     width: MediaQuery.of(context).size.width * 0.25,
                     child: AspectRatio(
                       aspectRatio: 2.5 / 4, // width : height
