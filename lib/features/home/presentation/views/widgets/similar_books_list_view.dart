@@ -7,7 +7,7 @@ class SimilarBooksListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.20,
+      height: MediaQuery.of(context).size.height * 0.17,
       width: MediaQuery.of(context).size.width * 1.0,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
