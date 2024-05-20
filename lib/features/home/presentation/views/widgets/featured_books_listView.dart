@@ -12,7 +12,9 @@ class FeaturedBooksListView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const CustomBookImage();
+          return CustomBookImage(
+            width: MediaQuery.of(context).size.width * 0.40,
+          );
         },
       ),
     );
