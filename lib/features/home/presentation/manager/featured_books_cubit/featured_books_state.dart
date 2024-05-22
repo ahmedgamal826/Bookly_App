@@ -1,4 +1,4 @@
-part of 'newest_books_cubit.dart';
+part of 'featured_books_cubit.dart';
 
 abstract class NewestBooksState extends Equatable {
   const NewestBooksState();
@@ -20,5 +20,7 @@ class NewestBooksFailure extends NewestBooksState {
 
 class NewestBooksSuccess extends NewestBooksState {
   // Success State
-  final List<BookModel> books = [];
+  final List<BookModel> books;
+
+  const NewestBooksSuccess(this.books);
 }
