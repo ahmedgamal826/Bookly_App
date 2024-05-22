@@ -13,20 +13,22 @@ class ServerFailure extends Failure {
   factory ServerFailure.fromDioError(DioError dioError) {
     switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
-        return ServerFailure('Connection timeout with ApiServere');
+        return ServerFailure('Connection timeout with ApiServer');
       case DioExceptionType.sendTimeout:
-        return ServerFailure('Send timeout with ApiServere');
+        return ServerFailure('Send timeout with ApiServer');
       case DioExceptionType.receiveTimeout:
-        return ServerFailure('Receive timeout with ApiServere');
+        return ServerFailure('Receive timeout with ApiServer');
       case DioExceptionType.badCertificate:
-        return ServerFailure('Bad Certificate with ApiServere');
+        return ServerFailure('Bad Certificate with ApiServer');
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
-            dioError.response!.statusCode!, dioError.response!.data);
+            // Bad Response
+            dioError.response!.statusCode!,
+            dioError.response!.data);
       case DioExceptionType.cancel:
-        return ServerFailure('Request to ApiService canceled');
+        return ServerFailure('Request to ApiServer canceled');
       case DioExceptionType.connectionError:
-        return ServerFailure('Error Connection with ApiServere');
+        return ServerFailure('Error Connection with ApiServer');
       case DioExceptionType.unknown:
         if (dioError.message!.contains('SocketException')) {
           return ServerFailure('No Internet Connection');
