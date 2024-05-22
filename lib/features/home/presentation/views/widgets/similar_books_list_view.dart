@@ -16,6 +16,8 @@ class SimilarBooksListView extends StatelessWidget {
           itemCount: 10,
           itemBuilder: (context, index) {
             return CustomBookImage(
+              imageUrl:
+                  'https://t3.ftcdn.net/jpg/03/83/46/48/360_F_383464809_VAyaM0bON9NZT1UCPXghp8GhHx56QKqm.jpg',
               width: MediaQuery.of(context).size.width * 0.29,
             );
           },
