@@ -32,7 +32,7 @@ class BooklyApp extends StatelessWidget {
           create: (context) {
             return NewestBooksCubit(
               getIt.get<HomeRepoImplementations>(),
-            );
+            )..fetchNewestBooks();
           },
         )
       ],

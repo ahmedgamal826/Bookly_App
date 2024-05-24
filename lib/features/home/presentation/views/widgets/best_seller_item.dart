@@ -1,48 +1,76 @@
 import 'package:bookly_app/constants.dart';
+import 'package:bookly_app/core/utils/app_router.dart';
+import 'package:bookly_app/core/utils/assets.dart';
 import 'package:bookly_app/core/utils/styles.dart';
+import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/book_rating.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/custom_image_newest_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BookListViewItem extends StatelessWidget {
-  const BookListViewItem({super.key});
+  const BookListViewItem({super.key, required this.bookModel});
+
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.5,
-          child: Text(
-            'Harry Potter and the Goblet of Fire ',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: Styles.textStyle20.copyWith(fontFamily: kGtSectraFine),
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).push(AppRouter.kBookDetailsView);
+      },
+      child: Row(
+        children: [
+          CustomImageNewestListView(
+              imageUrl: bookModel.volumeInfo.imageLinks!.thumbnail),
+          const SizedBox(
+            width: 30,
           ),
-        ),
-        const SizedBox(
-          height: 3,
-        ),
-        const Text(
-          'J.K. Rowling',
-          style: Styles.textStyle14,
-        ),
-        const SizedBox(
-          height: 11,
-        ),
-        Row(
-          children: [
-            Text(
-              kBookPrice,
-              style: Styles.textStyle20.copyWith(fontWeight: FontWeight.bold),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Text(
+                    bookModel.volumeInfo.title!,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style:
+                        Styles.textStyle20.copyWith(fontFamily: kGtSectraFine),
+                  ),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                Text(
+                  bookModel.volumeInfo.authors?.join(', ') ?? 'Unknown Author',
+                  style: Styles.textStyle14,
+                ),
+                const SizedBox(
+                  height: 11,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Free',
+                      style: Styles.textStyle20
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      width: 70,
+                    ),
+                    Text(
+                      'Pages: ${bookModel.volumeInfo.pageCount ?? 'Unknown'}',
+                      style: Styles.textStyle14,
+                    ),
+                  ],
+                )
+              ],
             ),
-            SizedBox(
-              width: 37,
-            ),
-            BookRating(),
-          ],
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

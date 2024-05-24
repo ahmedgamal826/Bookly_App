@@ -37,7 +37,7 @@ class SearchResultListView extends StatelessWidget {
                   const SizedBox(
                     width: 30,
                   ),
-                  const BookListViewItem(),
+                  // const BookListViewItem(),
                 ],
               ),
             );
