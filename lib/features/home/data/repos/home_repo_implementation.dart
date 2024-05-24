@@ -17,7 +17,34 @@ class HomeRepoImplementations implements HomeRepo {
       //var data
       Map data = await apiService.get(
           endPoint:
-              'volumes?Filtering=free-ebooks&q=subject:programming &Sorting=newest');
+              'volumes?Filtering=paid-ebooks&Sorting=newest &q=artifical intelligence');
+
+      List<BookModel> books = [];
+
+      for (var item in data['items']) {
+        books.add(BookModel.fromJson(item));
+      }
+      return right(books); // as Either<Failure, List<BookModel>>
+    } on DioException catch (e) {
+      // ignore: deprecated_member_use, unrelated_type_equality_checks
+      if (e == DioError) {
+        return left(
+          ServerFailure.fromDioError(e), // Dio Exception
+        );
+      }
+      return left(
+          ServerFailure(e.toString())); // any exception except dio exception
+    }
+  }
+
+  // fetchFeaturedBooks method  ==> show all books
+  @override
+  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
+    try {
+      //var data
+      Map data = await apiService.get(
+          endPoint:
+              'volumes?Filtering=free-ebooks&q=subject:Python programming language');
 
       List<BookModel> books = [];
 
@@ -37,13 +64,15 @@ class HomeRepoImplementations implements HomeRepo {
     }
   }
 
-  // fetchFeaturedBooks method  ==> show all books
+  // fetchSimilarBooks method  ==> show all books
   @override
-  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks(
+      {required String category}) async {
     try {
       //var data
       Map data = await apiService.get(
-          endPoint: 'volumes?Filtering=free-ebooks&q=subject:programming');
+          endPoint:
+              'volumes?Filtering=free-ebooks&q=subject:Python programming language');
 
       List<BookModel> books = [];
 
