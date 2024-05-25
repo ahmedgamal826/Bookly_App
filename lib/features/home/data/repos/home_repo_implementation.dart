@@ -192,4 +192,18 @@ class HomeRepoImplementations implements HomeRepo {
       return left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<BookModel>>> searchBooks(String query) async {
+    try {
+      Map data = await apiService.get(endPoint: 'volumes?q=$query');
+
+      List<BookModel> books = (data['items'] as List)
+          .map((item) => BookModel.fromJson(item))
+          .toList();
+      return right(books);
+    } on DioException catch (e) {
+      return left(ServerFailure.fromDioError(e));
+    }
+  }
 }

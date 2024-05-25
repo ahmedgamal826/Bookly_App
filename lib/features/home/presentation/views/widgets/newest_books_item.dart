@@ -63,10 +63,6 @@ class BookListViewItem extends StatelessWidget {
                       rating: bookModel.volumeInfo.averageRating ?? 0.0,
                       count: bookModel.volumeInfo.ratingsCount ?? 0,
                     )
-                    // Text(
-                    //   'Pages: ${bookModel.volumeInfo.pageCount ?? 'Unknown'}',
-                    //   style: Styles.textStyle14,
-                    // ),
                   ],
                 )
               ],
