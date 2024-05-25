@@ -5,8 +5,8 @@ import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SimilarBooksListView extends StatelessWidget {
-  const SimilarBooksListView({super.key});
+class SimilarBooksListview extends StatelessWidget {
+  const SimilarBooksListview({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,26 +14,23 @@ class SimilarBooksListView extends StatelessWidget {
       builder: (context, state) {
         if (state is SimilarBooksSuccess) {
           return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.17,
-            width: MediaQuery.of(context).size.width * 1.0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
+            height: MediaQuery.of(context).size.height * .15,
+            child: ListView.builder(
+                itemCount: state.books.length,
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
                 itemBuilder: (context, index) {
                   return CustomBookImage(
+                    width: MediaQuery.of(context).size.width * 0.25,
                     imageUrl:
-                        'https://t3.ftcdn.net/jpg/03/83/46/48/360_F_383464809_VAyaM0bON9NZT1UCPXghp8GhHx56QKqm.jpg',
-                    width: MediaQuery.of(context).size.width * 0.29,
+                        state.books[index].volumeInfo.imageLinks?.thumbnail ??
+                            '',
                   );
-                },
-              ),
-            ),
+                }),
           );
         } else if (state is SimilarBooksFailure) {
-          return CustomErrorWidget(errorMessage: state.errorMessage);
+          return CustomErrorWidget(
+            errorMessage: state.errorMessage,
+          );
         } else {
           return const CustomLoadingIndicator();
         }

@@ -1,10 +1,12 @@
+import 'dart:ffi';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomBookImage extends StatelessWidget {
   CustomBookImage({super.key, required this.width, required this.imageUrl});
 
-  var width;
+  double width;
   final String imageUrl;
 
   @override

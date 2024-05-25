@@ -1,13 +1,14 @@
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/core/widgets/custom_button.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
-import 'package:bookly_app/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_details_appBar.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key});
+  const BookDetailsSection({super.key, required this.bookModel});
+
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +19,20 @@ class BookDetailsSection extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.55,
           height: MediaQuery.of(context).size.height * 0.27,
           child: CustomBookImage(
-            width: MediaQuery.of(context).size.width * 0.2,
-            imageUrl:
-                'https://t3.ftcdn.net/jpg/03/83/46/48/360_F_383464809_VAyaM0bON9NZT1UCPXghp8GhHx56QKqm.jpg',
-          ),
+              width: MediaQuery.of(context).size.width * 0.2,
+              imageUrl: bookModel.volumeInfo.imageLinks?.thumbnail ?? ''),
         ),
         const SizedBox(
           height: 25,
         ),
-        const Text(
-          'The Jungle Book',
-          style: Styles.textStyle30,
-        ),
+        Text(bookModel.volumeInfo.title!,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: Styles.textStyle30
+                .copyWith(fontWeight: FontWeight.bold, fontSize: 25)),
         Text(
-          'Rudyard Kipling',
+          bookModel.volumeInfo.authors?[0] ?? '',
           style: Styles.textStyle18.copyWith(
               color: Colors.white.withOpacity(0.5),
               fontStyle: FontStyle.italic),
