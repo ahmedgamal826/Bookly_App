@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:bookly_app/features/search/data/repo/search_repo_implementation.dart';
-import 'package:bookly_app/features/search/presentation/manager/cubit/search_books_state.dart';
+import 'package:bookly_app/features/search/presentation/manager/serach_books_cubit/search_books_state.dart';
 
 class SearchBooksCubit extends Cubit<SearchBooksState> {
   final SearchRepoImplementation searchRepo;
