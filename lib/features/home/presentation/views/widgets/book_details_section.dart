@@ -1,9 +1,11 @@
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/core/widgets/custom_button.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_details_appBar.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookDetailsSection extends StatelessWidget {
   const BookDetailsSection({super.key, required this.bookModel});
@@ -40,10 +42,26 @@ class BookDetailsSection extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BookRating(
+              rating: bookModel.volumeInfo.averageRating ?? 0.0,
+              count: bookModel.volumeInfo.ratingsCount ?? 0,
+            ),
+          ],
+        ),
         const SizedBox(
           height: 20,
         ),
-        const CustomButton(),
+        CustomButton(
+          onPressed: () async {
+            Uri _url = Uri.parse(bookModel.volumeInfo.previewLink!);
+            if (!await launchUrl(_url)) {
+              throw Exception('Could not launch $_url');
+            }
+          },
+        ),
       ],
     );
   }

@@ -2,6 +2,7 @@ import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utils/app_router.dart';
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_image_newest_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -58,10 +59,14 @@ class BookListViewItem extends StatelessWidget {
                     const SizedBox(
                       width: 50,
                     ),
-                    Text(
-                      'Pages: ${bookModel.volumeInfo.pageCount ?? 'Unknown'}',
-                      style: Styles.textStyle14,
-                    ),
+                    BookRating(
+                      rating: bookModel.volumeInfo.averageRating ?? 0.0,
+                      count: bookModel.volumeInfo.ratingsCount ?? 0,
+                    )
+                    // Text(
+                    //   'Pages: ${bookModel.volumeInfo.pageCount ?? 'Unknown'}',
+                    //   style: Styles.textStyle14,
+                    // ),
                   ],
                 )
               ],
