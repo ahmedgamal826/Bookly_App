@@ -6,4 +6,4 @@ const kGtSectraFine = 'GT Sectra Fine';
 
 const kBookPrice = 'Free';
 
-const kFreePreview = 'preview';
+const kFreePreview = 'Preview';

@@ -10,9 +10,11 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     this.onPressed,
+    required this.bookModel,
   });
 
   final void Function()? onPressed;
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class CustomButton extends StatelessWidget {
             ),
             onPressed: onPressed,
             child: Text(
-              kFreePreview,
+              getText(bookModel),
               style: Styles.textStyle18
                   .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
             ),
@@ -65,5 +67,13 @@ class CustomButton extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String getText(BookModel bookModel) {
+    if (bookModel.volumeInfo.previewLink == null) {
+      return 'Not Available';
+    } else {
+      return kFreePreview;
+    }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:bookly_app/core/functions/launch_custom_url.dart';
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/core/widgets/custom_button.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
@@ -55,11 +56,9 @@ class BookDetailsSection extends StatelessWidget {
           height: 20,
         ),
         CustomButton(
+          bookModel: bookModel,
           onPressed: () async {
-            Uri _url = Uri.parse(bookModel.volumeInfo.previewLink!);
-            if (!await launchUrl(_url)) {
-              throw Exception('Could not launch $_url');
-            }
+            await launchCustomUrl(context, bookModel.volumeInfo.previewLink!);
           },
         ),
       ],
